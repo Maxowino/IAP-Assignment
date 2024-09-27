@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 function classAutoLoad($classname){
 $directories=["headings","layout","menus","pages"];
