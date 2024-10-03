@@ -11,7 +11,9 @@ foreach ($directories As $dir){
     }
 }
 
-spl_autoload_register('classAutoload');
+spl_autoload_register('classAutoLoad');
+
+    $ObjGlob = new fncs();
 
 
 
@@ -23,7 +25,8 @@ require_once "user_details.php";
 //create class instance
      $Objlayout = new layout();
     $Objmenus=new menus();
-    $Objheading=new headings();
+    // $Objheading=new heading();
+    $Objheading= new headings();
     $ObjCont = new content();
     
 
@@ -33,6 +36,8 @@ require_once "user_details.php";
     $conn = new dbconnection(DBTYPE,HOSTNAME,DBPORT,HOSTUSER,HOSTPASS,DBNAME);
 
 
+    $ObjAuth = new auth();
+    $ObjAuth->signup($conn, $ObjGlob);
 
 // $Obj = new user_details();
 // $arr= [ "Black", "white", "green","red"];
