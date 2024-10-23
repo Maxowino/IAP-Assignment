@@ -1,0 +1,25 @@
+
+<html lang='eng'>
+    <body>
+        <div>
+        <button id="load" onclick="sendAjax()">Click More</button>  
+        <p id="ajx"></p>      
+        </div> 
+
+        <script>
+    var xhr= new XMLHTTpRequest();
+    xhr.open('GET','another_page.html');
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            document.getElementById('ajx').innerHTML = xhr.responseText;
+        }
+    };
+    function sendAjax(){
+        xhr.send();
+        document.getElementById('load').style.display ='none';
+    }
+    </script>
+    
+    </body>
+
+</html>
