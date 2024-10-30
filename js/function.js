@@ -17,7 +17,13 @@ $(document).ready(function(){
     $('#in_put').keyup(
         function()
     {
-        
+        var search =$(this).val();
+        if(search !=''){
+
+            load_data(search);
+        }   else{
+            load_data();
+        }
 
     })
 

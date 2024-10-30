@@ -1,5 +1,12 @@
   <?php
 
+  session_start();
+
+  require "includes/constants.php";
+  require "includes/dbconnection.php";
+
+  require "lang/en.php";
+
 function classAutoLoad($classname){
 $directories=["headings","layout","menus","pages"];
 
@@ -14,6 +21,7 @@ foreach ($directories As $dir){
 spl_autoload_register('classAutoLoad');
 
     $ObjGlob = new fncs();
+    $ObjSendMail= new SendMail();
 
 
 
@@ -28,6 +36,7 @@ require_once "user_details.php";
     // $Objheading=new heading();
     $Objheading= new headings();
     $ObjCont = new content();
+    $ObjForm= new user_forms();
     
 
     require "includes/constants.php";
@@ -37,8 +46,12 @@ require_once "user_details.php";
 
 
     $ObjAuth = new auth();
-    $ObjAuth->signup($conn, $ObjGlob);
-
+    $ObjAuth->signup($conn, $ObjGlob,$ObjSendMail,$lang,$conf);
+    $ObjAuth->verify_code($conn, $ObjGlob,$ObjSendMail,$lang,$conf);
+    $ObjAuth->set_passphrase($conn, $ObjGlob,$ObjSendMail,$lang,$conf);
+    $ObjAuth->signin($conn, $ObjGlob,$ObjSendMail,$lang,$conf);
+    $ObjAuth->signout($conn, $ObjGlob,$ObjSendMail,$lang,$conf);
+    $ObjAuth->save_details($conn, $ObjGlob,$ObjSendMail,$lang,$conf);
 // $Obj = new user_details();
 // $arr= [ "Black", "white", "green","red"];
 // foreach ($arr as $color){
